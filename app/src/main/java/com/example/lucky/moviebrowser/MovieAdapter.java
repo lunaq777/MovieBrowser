@@ -22,6 +22,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private List<Movie> mMovieList;
     private LayoutInflater mInflater;
     private Context mContext;
+    private ClickListener clickListener;
 
     public MovieAdapter(Context context) {
         this.mContext = context;
@@ -46,13 +47,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(final MovieViewHolder holder, int position) {
         Movie movie = mMovieList.get(position);
 
         Picasso.with(mContext)
                 .load(movie.getPoster())
-                .placeholder(R.color.colorAccent)
+                .placeholder(R.color.white)
                 .into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (clickListener != null) {
+                    clickListener.onClickedItem(holder.itemView, holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     @Override
@@ -66,4 +76,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         notifyDataSetChanged();
     }
 
+    public void setOnItemClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    interface ClickListener {
+        void onClickedItem(View v, int position);
+    }
+
+    public Movie getMovieAt(int pos){
+        return mMovieList.get(pos);
+    }
 }

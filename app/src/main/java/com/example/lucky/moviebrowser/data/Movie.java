@@ -2,13 +2,14 @@ package com.example.lucky.moviebrowser.data;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created on 8/6/2017.
  */
 
-public class Movie {
+public class Movie implements Serializable{
 
     private String mTitle;
 
@@ -39,11 +40,11 @@ public class Movie {
         this.mPoster = poster;
     }
 
-    public String getRaiting() {
+    public String getRating() {
         return mRating;
     }
 
-    public void setRaiting(String description) {
+    public void setRating(String description) {
         this.mRating = description;
     }
 
