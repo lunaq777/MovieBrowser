@@ -1,14 +1,27 @@
 package com.example.lucky.moviebrowser.data;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * Created on 8/6/2017.
  */
 
 public class Movie {
+
     private String mTitle;
+
+    @SerializedName("poster_path")
     private String mPoster;
-    private String mRaiting;
+
+    @SerializedName("rating")
+    private String mRating;
+
+    @SerializedName("year")
     private String mYear;
+
+    public static final String TMDB_IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
 
     public String getTitle() {
         return mTitle;
@@ -19,7 +32,7 @@ public class Movie {
     }
 
     public String getPoster() {
-        return "http://t2.gstatic.com/images?q=tbn:ANd9GcQW3LbpT94mtUG1PZIIzJNxmFX399wr_NcvoppJ82k7z99Hx6in";
+        return TMDB_IMAGE_PATH + mPoster;
     }
 
     public void setPoster(String poster) {
@@ -27,11 +40,11 @@ public class Movie {
     }
 
     public String getRaiting() {
-        return mRaiting;
+        return mRating;
     }
 
     public void setRaiting(String description) {
-        this.mRaiting = description;
+        this.mRating = description;
     }
 
     public String getYear() {
@@ -40,5 +53,13 @@ public class Movie {
 
     public void setYear(String backdrop) {
         this.mYear = backdrop;
+    }
+
+    public static class MovieResult {
+        private List<Movie> results;
+
+        public List<Movie> getResults() {
+            return results;
+        }
     }
 }
